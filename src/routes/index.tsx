@@ -30,7 +30,7 @@ const INTRO =
    'Software developer with a background in Multiplataform Application Development (DAM), focused on Data Science and Artificial Intelligence. I build data-driven applications and integrate APIs to create efficient, automated solutions for real-world problems. Currently looking for my next challenge'
 
 /** REPLACE with your email */
-const EMAIL = 'djsm.djsm1997@gmail.com'
+const EMAIL = 'daniel.sanchez.devx@gmail.com'
 
 /** REPLACE with your LinkedIn URL */
 const LINKEDIN_URL = 'https://www.linkedin.com/in/daniel-josé-sánchez-moares-2020733a4'
