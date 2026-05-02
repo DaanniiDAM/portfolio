@@ -3,6 +3,12 @@ import { allJobs, allEducations, allProjects } from 'content-collections'
 import { Badge } from '@/components/ui/badge'
 import { submitContactForm } from '@/lib/contact-form'
 import {
+  educationTranslations,
+  jobTranslations,
+  pickLanguage,
+  useLanguage,
+} from '@/lib/i18n'
+import {
   Github,
   ExternalLink,
   Mail,
@@ -38,6 +44,165 @@ const LINKEDIN_URL = 'https://www.linkedin.com/in/daniel-josé-sánchez-moares-2
 
 /** REPLACE with your GitHub URL */
 const GITHUB_URL = 'https://github.com/DaniSanchezDevx'
+
+const HOME_COPY = {
+  en: {
+    headline:
+      'Multiplatform Software Developer (DAM) · Data Science & AI · Backend & Automation',
+    intro:
+      'Software developer with a background in Multiplatform Application Development (DAM), focused on Data Science and Artificial Intelligence. I build data-driven applications and integrate APIs to create efficient, automated solutions for real-world problems. Currently looking for my next challenge.',
+    available: 'Open to opportunities',
+    heroGreeting: "Hi, I'm",
+    viewProjects: 'View Projects',
+    contactMe: 'Contact Me',
+    aboutTitle: 'About Me',
+    aboutSubtitle: 'A bit about who I am',
+    aboutText: `I'm a junior software developer with a focus on automation, APIs, and data
+science. I enjoy building tools that reduce repetitive work and help teams
+move faster, whether that's a data pipeline, an API integration, or a
+command-line utility that saves hours each week.
+
+My background spans scripting and automation, working with REST and
+GraphQL APIs, and exploring machine learning workflows with Python.
+I care deeply about readable code, good documentation, and systems that
+are easy to reason about.
+
+When I'm not coding, you'll find me exploring new datasets, contributing
+to open-source projects, or learning about the latest developments in AI.`,
+    aboutHighlights: [
+      'Python Automation',
+      'REST APIs',
+      'Data Pipelines',
+      'Machine Learning',
+      'Open Source',
+      'CLI Tools',
+    ],
+    getInTouch: 'Get in touch',
+    viewResume: 'View Resume',
+    skillsTitle: 'Skills & Technologies',
+    skillsSubtitle: 'Tools I work with',
+    projectsTitle: 'Projects',
+    projectsSubtitle: "Things I've built",
+    liveDemo: 'Live Demo',
+    experienceTitle: 'Experience & Education',
+    experienceSubtitle: 'My journey so far',
+    workExperience: 'Work Experience',
+    education: 'Education',
+    present: 'Present',
+    contactTitle: 'Get In Touch',
+    contactSubtitle: "Let's work together",
+    contactText:
+      "I'm currently open to junior developer roles and freelance projects. Whether you have a question or just want to say hi, feel free to reach out!",
+    linkedInProfile: 'LinkedIn Profile',
+    githubProfile: 'GitHub Profile',
+    messageSent: 'Message sent!',
+    messageSentText: "Thanks for reaching out. I'll be in touch soon.",
+    sendAnother: 'Send another',
+    botField: "Don't fill this out:",
+    name: 'Name',
+    namePlaceholder: 'Your name',
+    email: 'Email',
+    emailPlaceholder: 'your@email.com',
+    message: 'Message',
+    messagePlaceholder: 'Your message...',
+    fallbackError: 'Could not send the message.',
+    sending: 'Sending...',
+    sendMessage: 'Send Message',
+    footerBuilt: 'Built with TanStack Start & Tailwind CSS.',
+  },
+  es: {
+    headline:
+      'Desarrollador de Aplicaciones Multiplataforma (DAM) · Data Science e IA · Backend y Automatización',
+    intro:
+      'Desarrollador de software con formación en Desarrollo de Aplicaciones Multiplataforma (DAM), enfocado en Data Science e Inteligencia Artificial. Creo aplicaciones orientadas a datos e integro APIs para construir soluciones eficientes y automatizadas para problemas reales. Actualmente busco mi próximo reto.',
+    available: 'Abierto a oportunidades',
+    heroGreeting: 'Hola, soy',
+    viewProjects: 'Ver proyectos',
+    contactMe: 'Contactar',
+    aboutTitle: 'Sobre mi',
+    aboutSubtitle: 'Un poco sobre quien soy',
+    aboutText: `Soy un desarrollador junior centrado en automatización, APIs y ciencia de datos.
+Me gusta crear herramientas que reduzcan tareas repetitivas y ayuden a los equipos a trabajar mejor, ya sea con pipelines de datos, integraciones con APIs o utilidades que ahorran tiempo.
+
+Mi experiencia combina scripting, automatización, trabajo con APIs REST y GraphQL, y aprendizaje continuo en machine learning con Python.
+Valoro el código claro, la buena documentación y los sistemas fáciles de mantener.
+
+Cuando no estoy programando, suelo explorar nuevos datasets, aprender sobre IA o mejorar proyectos personales.`,
+    aboutHighlights: [
+      'Automatización con Python',
+      'APIs REST',
+      'Pipelines de datos',
+      'Machine Learning',
+      'Open Source',
+      'Herramientas CLI',
+    ],
+    getInTouch: 'Contactar',
+    viewResume: 'Ver CV',
+    skillsTitle: 'Habilidades y tecnologías',
+    skillsSubtitle: 'Herramientas con las que trabajo',
+    projectsTitle: 'Proyectos',
+    projectsSubtitle: 'Cosas que he construido',
+    liveDemo: 'Demo',
+    experienceTitle: 'Experiencia y formación',
+    experienceSubtitle: 'Mi recorrido hasta ahora',
+    workExperience: 'Experiencia laboral',
+    education: 'Formación',
+    present: 'Actualidad',
+    contactTitle: 'Contacto',
+    contactSubtitle: 'Trabajemos juntos',
+    contactText:
+      'Actualmente estoy abierto a roles junior de desarrollo y proyectos freelance. Si tienes una pregunta, una propuesta o simplemente quieres saludar, puedes escribirme.',
+    linkedInProfile: 'Perfil de LinkedIn',
+    githubProfile: 'Perfil de GitHub',
+    messageSent: 'Mensaje enviado',
+    messageSentText: 'Gracias por escribirme. Te responderé pronto.',
+    sendAnother: 'Enviar otro',
+    botField: 'No rellenes esto:',
+    name: 'Nombre',
+    namePlaceholder: 'Tu nombre',
+    email: 'Email',
+    emailPlaceholder: 'tu@email.com',
+    message: 'Mensaje',
+    messagePlaceholder: 'Tu mensaje...',
+    fallbackError: 'No se pudo enviar el mensaje.',
+    sending: 'Enviando...',
+    sendMessage: 'Enviar mensaje',
+    footerBuilt: 'Creado con TanStack Start y Tailwind CSS.',
+  },
+}
+
+const SKILL_CATEGORY_LABELS = {
+  en: {
+    'Programming Languages': 'Programming Languages',
+    'Tools & Platforms': 'Tools & Platforms',
+    'Data & AI': 'Data & AI',
+  },
+  es: {
+    'Programming Languages': 'Lenguajes de programación',
+    'Tools & Platforms': 'Herramientas y plataformas',
+    'Data & AI': 'Datos e IA',
+  },
+}
+
+const PROJECT_DESCRIPTIONS = {
+  'cvpilot-ai': {
+    en: 'Full-stack SaaS application that analyzes resumes against job descriptions to improve ATS compatibility, keyword coverage, and interview readiness.',
+    es: 'Aplicación SaaS full-stack que analiza CVs frente a ofertas de empleo para mejorar la compatibilidad ATS, la cobertura de palabras clave y la preparación de entrevistas.',
+  },
+  pokemon: {
+    en: 'Python application that retrieves and processes Pokemon data from an external API',
+    es: 'Aplicación en Python que obtiene y procesa datos de Pokemon desde una API externa.',
+  },
+  portfolio: {
+    en: 'Responsive developer portfolio built with TanStack Start, typed Markdown content, dark mode, project pages, resume detail, and a working Vercel contact form.',
+    es: 'Portfolio responsive desarrollado con TanStack Start, contenido Markdown tipado, modo oscuro, páginas de proyectos, CV detallado y formulario de contacto funcional en Vercel.',
+  },
+}
+
+function useHomeCopy() {
+  const { language } = useLanguage()
+  return { language, copy: HOME_COPY[language] }
+}
 
 /** About section extended bio — REPLACE with your story */
 const ABOUT_TEXT = `I'm a junior software developer with a focus on automation, APIs, and data
@@ -91,6 +256,8 @@ const SKILLS = {
 // ─── Hero Section ─────────────────────────────────────────────────────────────
 
 function Hero() {
+  const { copy } = useHomeCopy()
+
   return (
     <section
       id="hero"
@@ -117,23 +284,23 @@ function Hero() {
         <div className="animate-fade-in inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/40 bg-primary/10 text-primary text-sm">
           {/* REPLACE "Open to opportunities" with your current status */}
           <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-          Open to opportunities
+          {copy.available}
         </div>
 
         {/* Name — REPLACE YOUR_NAME above */}
         <h1 className="animate-fade-in-up text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight">
-          Hi, I'm{' '}
+          {copy.heroGreeting}{' '}
           <span className="gradient-text">{YOUR_NAME}</span>
         </h1>
 
         {/* Headline */}
         <p className="animate-fade-in-up delay-100 text-lg sm:text-xl text-muted-foreground max-w-xl mx-auto leading-relaxed">
-          {HEADLINE}
+          {copy.headline}
         </p>
 
         {/* Intro */}
         <p className="animate-fade-in-up delay-200 text-base text-muted-foreground/80 max-w-lg mx-auto">
-          {INTRO}
+          {copy.intro}
         </p>
 
         {/* CTA buttons */}
@@ -142,13 +309,13 @@ function Hero() {
             href="/#projects"
             className="px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:opacity-90 transition-all hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-0.5"
           >
-            View Projects
+            {copy.viewProjects}
           </a>
           <a
             href="/#contact"
             className="px-6 py-3 rounded-lg border border-border bg-secondary text-secondary-foreground font-medium hover:border-primary/60 transition-all hover:-translate-y-0.5"
           >
-            Contact Me
+            {copy.contactMe}
           </a>
         </div>
 
@@ -203,10 +370,12 @@ const ABOUT_HIGHLIGHTS = [
 ]
 
 function About() {
+  const { copy } = useHomeCopy()
+
   return (
     <section id="about" className="py-24 px-4">
       <div className="max-w-5xl mx-auto">
-        <SectionHeading title="About Me" subtitle="A bit about who I am" />
+        <SectionHeading title={copy.aboutTitle} subtitle={copy.aboutSubtitle} />
 
         <div className="mt-12 grid md:grid-cols-2 gap-12 items-start">
           {/* Profile photo */}
@@ -219,7 +388,7 @@ function About() {
               />
             </div>
             <div className="flex flex-wrap gap-2">
-              {ABOUT_HIGHLIGHTS.map((tag) => (
+              {copy.aboutHighlights.map((tag) => (
                 <Badge
                   key={tag}
                   variant="secondary"
@@ -233,7 +402,7 @@ function About() {
 
           {/* Bio text */}
           <div className="space-y-4 text-muted-foreground leading-relaxed">
-            {ABOUT_TEXT.trim()
+            {copy.aboutText.trim()
               .split('\n\n')
               .map((para, i) => (
                 /* REPLACE ABOUT_TEXT above with your own paragraphs */
@@ -244,14 +413,14 @@ function About() {
                 href="/#contact"
                 className="px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-all"
               >
-                Get in touch
+                {copy.getInTouch}
               </a>
               {/* REPLACE href with your resume/CV PDF link */}
               <a
                 href="/resume"
                 className="px-4 py-2 rounded-lg border border-border text-sm font-medium hover:border-primary/60 transition-all"
               >
-                View Resume
+                {copy.viewResume}
               </a>
             </div>
           </div>
@@ -264,12 +433,14 @@ function About() {
 // ─── Skills Section ───────────────────────────────────────────────────────────
 
 function Skills() {
+  const { language, copy } = useHomeCopy()
+
   return (
     <section id="skills" className="py-24 px-4 bg-secondary/20">
       <div className="max-w-5xl mx-auto">
         <SectionHeading
-          title="Skills & Technologies"
-          subtitle="Tools I work with"
+          title={copy.skillsTitle}
+          subtitle={copy.skillsSubtitle}
         />
 
         <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -279,7 +450,11 @@ function Skills() {
               className="bg-card border border-border rounded-xl p-6 card-glow"
             >
               <h3 className="font-semibold text-foreground mb-4 text-sm uppercase tracking-wider text-primary">
-                {category}
+                {
+                  SKILL_CATEGORY_LABELS[language][
+                    category as keyof typeof SKILL_CATEGORY_LABELS.en
+                  ]
+                }
               </h3>
               <ul className="space-y-3">
                 {items.map((skill) => (
@@ -304,13 +479,14 @@ function Skills() {
 
 function Projects() {
   const projects = allProjects
+  const { language, copy } = useHomeCopy()
 
   return (
     <section id="projects" className="py-24 px-4">
       <div className="max-w-5xl mx-auto">
         <SectionHeading
-          title="Projects"
-          subtitle="Things I've built"
+          title={copy.projectsTitle}
+          subtitle={copy.projectsSubtitle}
         />
 
         <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-2 gap-6">
@@ -324,7 +500,15 @@ function Projects() {
                   {project.title}
                 </h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">
-                  {project.description}
+                  {pickLanguage(
+                    language,
+                    PROJECT_DESCRIPTIONS[
+                      project._meta.path as keyof typeof PROJECT_DESCRIPTIONS
+                    ] ?? {
+                      en: project.description,
+                      es: project.description,
+                    },
+                  )}
                 </p>
               </div>
 
@@ -360,7 +544,7 @@ function Projects() {
                     className="inline-flex items-center gap-1.5 text-sm text-primary hover:text-primary/80 transition-colors"
                   >
                     <ExternalLink size={15} />
-                    Live Demo
+                    {copy.liveDemo}
                   </a>
                 )}
               </div>
@@ -471,19 +655,60 @@ function TimelineEntries({ entries }: { entries: TimelineEntry[] }) {
 }
 
 function Timeline() {
+  const { language, copy } = useHomeCopy()
   const jobs: TimelineEntry[] = sortNewestFirst(allJobs.map((j) => ({
     type: 'work',
-    title: j.jobTitle,
-    subtitle: `${j.company} · ${j.location}`,
-    date: formatTimelineDate(j.startDate, j.endDate, 'Present'),
-    summary: j.summary,
+    title: pickLanguage(
+      language,
+      jobTranslations[j._meta.path as keyof typeof jobTranslations]?.title ?? {
+        en: j.jobTitle,
+        es: j.jobTitle,
+      },
+    ),
+    subtitle: `${pickLanguage(
+      language,
+      jobTranslations[j._meta.path as keyof typeof jobTranslations]?.company ?? {
+        en: j.company,
+        es: j.company,
+      },
+    )} · ${pickLanguage(
+      language,
+      jobTranslations[j._meta.path as keyof typeof jobTranslations]?.location ?? {
+        en: j.location,
+        es: j.location,
+      },
+    )}`,
+    date: formatTimelineDate(j.startDate, j.endDate, copy.present),
+    summary: pickLanguage(
+      language,
+      jobTranslations[j._meta.path as keyof typeof jobTranslations]?.summary ?? {
+        en: j.summary,
+        es: j.summary,
+      },
+    ),
     tags: j.tags,
   })))
 
   const education: TimelineEntry[] = sortNewestFirst(allEducations.map((e) => ({
     type: 'education',
-    title: e.school,
-    subtitle: e.summary,
+    title: pickLanguage(
+      language,
+      educationTranslations[
+        e._meta.path as keyof typeof educationTranslations
+      ]?.school ?? {
+        en: e.school,
+        es: e.school,
+      },
+    ),
+    subtitle: pickLanguage(
+      language,
+      educationTranslations[
+        e._meta.path as keyof typeof educationTranslations
+      ]?.summary ?? {
+        en: e.summary,
+        es: e.summary,
+      },
+    ),
     date: formatTimelineDate(e.startDate, e.endDate),
     summary: '',
     tags: e.tags,
@@ -492,7 +717,7 @@ function Timeline() {
   return (
     <section id="experience" className="py-24 px-4 bg-secondary/20">
       <div className="max-w-3xl mx-auto">
-        <SectionHeading title="Experience & Education" subtitle="My journey so far" />
+        <SectionHeading title={copy.experienceTitle} subtitle={copy.experienceSubtitle} />
 
         <div className="mt-12 space-y-14">
           <div>
@@ -500,7 +725,7 @@ function Timeline() {
               <span className="w-9 h-9 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
                 <Briefcase size={18} />
               </span>
-              Work Experience
+              {copy.workExperience}
             </div>
             <TimelineEntries entries={jobs} />
           </div>
@@ -510,7 +735,7 @@ function Timeline() {
               <span className="w-9 h-9 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center text-accent">
                 <GraduationCap size={18} />
               </span>
-              Education
+              {copy.education}
             </div>
             <TimelineEntries entries={education} />
           </div>
@@ -526,19 +751,18 @@ function Contact() {
   const [submitted, setSubmitted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState('')
+  const { copy } = useHomeCopy()
 
   return (
     <section id="contact" className="py-24 px-4">
       <div className="max-w-2xl mx-auto">
-        <SectionHeading title="Get In Touch" subtitle="Let's work together" />
+        <SectionHeading title={copy.contactTitle} subtitle={copy.contactSubtitle} />
 
         <div className="mt-12 grid sm:grid-cols-2 gap-8">
           {/* Contact info */}
           <div className="space-y-6">
             <p className="text-muted-foreground leading-relaxed">
-              I'm currently open to junior developer roles and freelance
-              projects. Whether you have a question or just want to say hi,
-              feel free to reach out!
+              {copy.contactText}
             </p>
             <div className="space-y-3">
               {/* REPLACE EMAIL above with your real email */}
@@ -561,7 +785,7 @@ function Contact() {
                 <span className="w-9 h-9 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary group-hover:bg-primary/20 transition-colors">
                   <Linkedin size={16} />
                 </span>
-                <span className="text-sm">LinkedIn Profile</span>
+                <span className="text-sm">{copy.linkedInProfile}</span>
               </a>
               {/* REPLACE GITHUB_URL above */}
               <a
@@ -573,7 +797,7 @@ function Contact() {
                 <span className="w-9 h-9 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary group-hover:bg-primary/20 transition-colors">
                   <Github size={16} />
                 </span>
-                <span className="text-sm">GitHub Profile</span>
+                <span className="text-sm">{copy.githubProfile}</span>
               </a>
             </div>
           </div>
@@ -584,9 +808,9 @@ function Contact() {
               <div className="w-12 h-12 rounded-full bg-green-500/10 border border-green-500/30 flex items-center justify-center text-green-500">
                 <Mail size={20} />
               </div>
-              <p className="font-medium text-foreground">Message sent!</p>
+              <p className="font-medium text-foreground">{copy.messageSent}</p>
               <p className="text-sm text-muted-foreground">
-                Thanks for reaching out. I'll be in touch soon.
+                {copy.messageSentText}
               </p>
               <button
                 onClick={() => {
@@ -595,7 +819,7 @@ function Contact() {
                 }}
                 className="mt-2 text-sm text-primary hover:underline"
               >
-                Send another
+                {copy.sendAnother}
               </button>
             </div>
           ) : (
@@ -614,7 +838,7 @@ function Contact() {
                   setError(
                     err instanceof Error
                       ? err.message
-                      : 'Could not send the message.',
+                      : copy.fallbackError,
                   )
                 } finally {
                   setIsSubmitting(false)
@@ -624,13 +848,13 @@ function Contact() {
             >
               <p hidden>
                 <label>
-                  Don't fill this out: <input name="bot-field" />
+                  {copy.botField} <input name="bot-field" />
                 </label>
               </p>
 
               <div>
                 <label htmlFor="name" className="block text-sm font-medium mb-1">
-                  Name
+                  {copy.name}
                 </label>
                 <input
                   type="text"
@@ -638,13 +862,13 @@ function Contact() {
                   name="name"
                   required
                   className="w-full px-3 py-2 rounded-lg bg-secondary border border-border text-foreground placeholder:text-muted-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/60 transition-colors"
-                  placeholder="Your name"
+                  placeholder={copy.namePlaceholder}
                 />
               </div>
 
               <div>
                 <label htmlFor="email" className="block text-sm font-medium mb-1">
-                  Email
+                  {copy.email}
                 </label>
                 <input
                   type="email"
@@ -652,13 +876,13 @@ function Contact() {
                   name="email"
                   required
                   className="w-full px-3 py-2 rounded-lg bg-secondary border border-border text-foreground placeholder:text-muted-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/60 transition-colors"
-                  placeholder="your@email.com"
+                  placeholder={copy.emailPlaceholder}
                 />
               </div>
 
               <div>
                 <label htmlFor="message" className="block text-sm font-medium mb-1">
-                  Message
+                  {copy.message}
                 </label>
                 <textarea
                   id="message"
@@ -666,7 +890,7 @@ function Contact() {
                   required
                   rows={4}
                   className="w-full px-3 py-2 rounded-lg bg-secondary border border-border text-foreground placeholder:text-muted-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/60 transition-colors resize-none"
-                  placeholder="Your message..."
+                  placeholder={copy.messagePlaceholder}
                 />
               </div>
 
@@ -682,7 +906,7 @@ function Contact() {
                 className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-all hover:shadow-lg hover:shadow-primary/30 disabled:cursor-not-allowed disabled:opacity-70"
               >
                 <Send size={15} />
-                {isSubmitting ? 'Sending...' : 'Send Message'}
+                {isSubmitting ? copy.sending : copy.sendMessage}
               </button>
             </form>
           )}
@@ -695,13 +919,14 @@ function Contact() {
 // ─── Footer ───────────────────────────────────────────────────────────────────
 
 function Footer() {
+  const { copy } = useHomeCopy()
+
   return (
     <footer className="border-t border-border py-8 px-4">
       <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
         <p className="text-sm text-muted-foreground">
           {/* REPLACE "Your Name" with your name */}
-          © {new Date().getFullYear()} {YOUR_NAME}. Built with TanStack Start &
-          Tailwind CSS.
+          © {new Date().getFullYear()} {YOUR_NAME}. {copy.footerBuilt}
         </p>
         <div className="flex items-center gap-4">
           <a

@@ -3,6 +3,7 @@ import { allBlogs } from 'content-collections'
 import { marked } from 'marked'
 import { Badge } from '@/components/ui/badge'
 import { ArrowLeft, Calendar } from 'lucide-react'
+import { pageTranslations, useLanguage } from '@/lib/i18n'
 
 export const Route = createFileRoute('/blog/$slug')({
   component: BlogPost,
@@ -10,6 +11,8 @@ export const Route = createFileRoute('/blog/$slug')({
 
 function BlogPost() {
   const { slug } = Route.useParams()
+  const { language } = useLanguage()
+  const copy = pageTranslations[language]
   const post = allBlogs.find((p) => p._meta.path === slug)
 
   if (!post) {
@@ -17,10 +20,10 @@ function BlogPost() {
       <div className="min-h-screen  flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-900 mb-4">
-            Post not found
+            {copy.postNotFound}
           </h1>
           <Link to="/" className="text-blue-600 hover:underline">
-            Back to blog
+            {copy.backToBlog}
           </Link>
         </div>
       </div>
@@ -37,7 +40,7 @@ function BlogPost() {
           className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-8"
         >
           <ArrowLeft size={16} />
-          Back to blog
+          {copy.backToBlog}
         </Link>
 
         <article>
@@ -48,7 +51,7 @@ function BlogPost() {
             <div className="flex items-center gap-3 text-gray-500 mb-4">
               <Calendar size={16} />
               <time>
-                {new Date(post.date).toLocaleDateString('en-US', {
+                {new Date(post.date).toLocaleDateString(language === 'es' ? 'es-ES' : 'en-US', {
                   year: 'numeric',
                   month: 'long',
                   day: 'numeric',

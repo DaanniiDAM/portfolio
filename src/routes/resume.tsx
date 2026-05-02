@@ -10,6 +10,13 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from '@/components/ui/hover-card'
+import {
+  educationTranslations,
+  jobTranslations,
+  pageTranslations,
+  pickLanguage,
+  useLanguage,
+} from '@/lib/i18n'
 
 export const Route = createFileRoute('/resume')({
   component: App,
@@ -32,6 +39,8 @@ function formatDateRange(startDate: string, endDate?: string, fallback?: string)
 }
 
 function App() {
+  const { language } = useLanguage()
+  const copy = pageTranslations[language]
   const jobs = sortByStartDateDesc(allJobs)
   const educations = sortByStartDateDesc(allEducations)
 
@@ -40,10 +49,10 @@ function App() {
       <div className="mx-auto max-w-4xl space-y-8 sm:space-y-12">
         <div className="space-y-3 text-center sm:space-y-4">
           <h1 className="text-4xl font-bold leading-tight sm:text-5xl">
-            My Resume
+            {copy.resumeTitle}
           </h1>
           <p className="text-base text-muted-foreground sm:text-lg">
-            Professional Experience & Education
+            {copy.resumeSubtitle}
           </p>
           <Separator className="mt-6 sm:mt-8" />
         </div>
@@ -52,23 +61,17 @@ function App() {
         <Card className="gap-4 rounded-lg py-5 sm:gap-6 sm:py-6">
           <CardHeader className="px-4 sm:px-6">
             <CardTitle className="text-xl leading-tight sm:text-2xl">
-              Career Summary
+              {copy.careerSummaryTitle}
             </CardTitle>
           </CardHeader>
           <CardContent className="px-4 sm:px-6">
             <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:gap-8">
               <p className="min-w-0 flex-1 text-sm leading-7 text-muted-foreground sm:text-base sm:text-foreground">
-                Multiplatform Application Developer specialized in process
-                automation and API integration, currently expanding into
-                Data Science and Artificial Intelligence. Experienced in
-                building automated workflows using tools like n8n and
-                connecting external services to optimize real-world
-                processes. Strong problem-solving mindset with a focus on
-                efficiency, scalability, and continuous learning.
+                {copy.careerSummary}
               </p>
               <img
                 src="/daniel.jpg"
-                alt="Professional headshot"
+                alt={copy.headshotAlt}
                 className="mx-auto h-52 w-44 rounded-lg object-cover sm:mx-0 sm:rounded-xl"
               />
             </div>
@@ -78,7 +81,7 @@ function App() {
         {/* Work Experience */}
         <section className="space-y-4 sm:space-y-6">
           <h2 className="text-2xl font-semibold leading-tight sm:text-3xl">
-            Work Experience
+            {copy.workExperience}
           </h2>
           <div className="space-y-4 sm:space-y-6">
             {jobs.map((job) => (
@@ -87,20 +90,54 @@ function App() {
                   <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                     <div className="min-w-0 space-y-2">
                       <CardTitle className="text-lg leading-snug sm:text-xl">
-                        {job.jobTitle}
+                        {pickLanguage(
+                          language,
+                          jobTranslations[
+                            job._meta.path as keyof typeof jobTranslations
+                          ]?.title ?? {
+                            en: job.jobTitle,
+                            es: job.jobTitle,
+                          },
+                        )}
                       </CardTitle>
                       <p className="break-words text-sm font-medium text-muted-foreground sm:text-base">
-                        {job.company} - {job.location}
+                        {pickLanguage(
+                          language,
+                          jobTranslations[
+                            job._meta.path as keyof typeof jobTranslations
+                          ]?.company ?? {
+                            en: job.company,
+                            es: job.company,
+                          },
+                        )}{' '}
+                        -{' '}
+                        {pickLanguage(
+                          language,
+                          jobTranslations[
+                            job._meta.path as keyof typeof jobTranslations
+                          ]?.location ?? {
+                            en: job.location,
+                            es: job.location,
+                          },
+                        )}
                       </p>
                     </div>
                     <Badge variant="secondary" className="self-start text-xs sm:text-sm">
-                      {formatDateRange(job.startDate, job.endDate, 'Present')}
+                      {formatDateRange(job.startDate, job.endDate, copy.present)}
                     </Badge>
                   </div>
                 </CardHeader>
                 <CardContent className="px-4 sm:px-6">
                   <p className="mb-5 text-sm leading-7 text-muted-foreground sm:mb-6 sm:text-base sm:text-foreground">
-                    {job.summary}
+                    {pickLanguage(
+                      language,
+                      jobTranslations[
+                        job._meta.path as keyof typeof jobTranslations
+                      ]?.summary ?? {
+                        en: job.summary,
+                        es: job.summary,
+                      },
+                    )}
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {job.tags.map((tag) => (
@@ -112,7 +149,8 @@ function App() {
                         </HoverCardTrigger>
                         <HoverCardContent className="w-64">
                           <p className="text-sm">
-                            Experience with {tag} in professional development
+                            {copy.tagExperiencePrefix} {tag}{' '}
+                            {copy.tagExperienceSuffix}
                           </p>
                         </HoverCardContent>
                       </HoverCard>
@@ -135,7 +173,7 @@ function App() {
         {/* Education */}
         <section className="space-y-4 sm:space-y-6">
           <h2 className="text-2xl font-semibold leading-tight sm:text-3xl">
-            Education
+            {copy.education}
           </h2>
           <div className="space-y-4 sm:space-y-6">
             {educations.map((education) => (
@@ -143,7 +181,15 @@ function App() {
                 <CardHeader className="px-4 sm:px-6">
                   <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                     <CardTitle className="min-w-0 break-words text-lg leading-snug sm:text-xl">
-                      {education.school}
+                      {pickLanguage(
+                        language,
+                        educationTranslations[
+                          education._meta.path as keyof typeof educationTranslations
+                        ]?.school ?? {
+                          en: education.school,
+                          es: education.school,
+                        },
+                      )}
                     </CardTitle>
                     <Badge variant="secondary" className="self-start text-xs sm:shrink-0 sm:text-sm">
                       {formatDateRange(education.startDate, education.endDate)}
@@ -152,7 +198,15 @@ function App() {
                 </CardHeader>
                 <CardContent className="px-4 sm:px-6">
                   <p className="text-sm leading-7 text-muted-foreground sm:text-base sm:text-foreground">
-                    {education.summary}
+                    {pickLanguage(
+                      language,
+                      educationTranslations[
+                        education._meta.path as keyof typeof educationTranslations
+                      ]?.summary ?? {
+                        en: education.summary,
+                        es: education.summary,
+                      },
+                    )}
                   </p>
                   {education.content && (
                     <div

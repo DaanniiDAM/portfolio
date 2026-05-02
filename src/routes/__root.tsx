@@ -7,6 +7,13 @@ import {
 import { useState, useEffect } from 'react'
 import { Moon, Sun, Menu, X } from 'lucide-react'
 import { Link } from '@tanstack/react-router'
+import {
+  LanguageProvider,
+  type Language,
+  getInitialLanguage,
+  navTranslations,
+  useLanguage,
+} from '@/lib/i18n'
 import '../styles.css'
 
 export const Route = createRootRoute({
@@ -32,6 +39,8 @@ const themeScript = `
     var t = localStorage.getItem('theme');
     if (t === 'light') { document.documentElement.classList.remove('dark'); }
     else { document.documentElement.classList.add('dark'); }
+    var l = localStorage.getItem('language');
+    document.documentElement.lang = l === 'es' ? 'es' : 'en';
   } catch(e) { document.documentElement.classList.add('dark'); }
 })();
 `
@@ -43,10 +52,13 @@ function ThemeToggle({
   dark: boolean
   onToggle: () => void
 }) {
+  const { language } = useLanguage()
+  const labels = navTranslations[language]
+
   return (
     <button
       onClick={onToggle}
-      aria-label="Toggle theme"
+      aria-label={labels.toggleTheme}
       className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
     >
       {dark ? <Sun size={18} /> : <Moon size={18} />}
@@ -54,17 +66,34 @@ function ThemeToggle({
   )
 }
 
+function LanguageToggle() {
+  const { language, toggleLanguage } = useLanguage()
+  const labels = navTranslations[language]
+
+  return (
+    <button
+      onClick={toggleLanguage}
+      aria-label={labels.toggleLanguage}
+      className="min-w-10 rounded-lg px-2.5 py-2 text-xs font-semibold text-muted-foreground hover:bg-secondary hover:text-foreground transition-colors"
+    >
+      {language === 'en' ? 'ES' : 'EN'}
+    </button>
+  )
+}
+
 const navLinks = [
-  { href: '/#about', label: 'About' },
-  { href: '/#skills', label: 'Skills' },
-  { href: '/#projects', label: 'Projects' },
-  { href: '/#experience', label: 'Experience' },
-  { href: '/#contact', label: 'Contact' },
+  { href: '/#about', labelKey: 'about' },
+  { href: '/#skills', labelKey: 'skills' },
+  { href: '/#projects', labelKey: 'projects' },
+  { href: '/#experience', labelKey: 'experience' },
+  { href: '/#contact', labelKey: 'contact' },
 ]
 
 function NavBar({ dark, onToggle }: { dark: boolean; onToggle: () => void }) {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const { language } = useLanguage()
+  const labels = navTranslations[language]
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 20)
@@ -100,13 +129,14 @@ function NavBar({ dark, onToggle }: { dark: boolean; onToggle: () => void }) {
               href={link.href}
               className="px-3 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors rounded-md hover:bg-secondary"
             >
-              {link.label}
+              {labels[link.labelKey]}
             </a>
           ))}
         </div>
 
         <div className="flex items-center gap-2">
           <ThemeToggle dark={dark} onToggle={onToggle} />
+          <LanguageToggle />
           {/* Mobile menu toggle */}
           <button
             className="md:hidden p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
@@ -128,7 +158,7 @@ function NavBar({ dark, onToggle }: { dark: boolean; onToggle: () => void }) {
               onClick={() => setOpen(false)}
               className="block py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
-              {link.label}
+              {labels[link.labelKey]}
             </a>
           ))}
         </div>
@@ -139,10 +169,12 @@ function NavBar({ dark, onToggle }: { dark: boolean; onToggle: () => void }) {
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   const [dark, setDark] = useState(true)
+  const [initialLanguage, setInitialLanguage] = useState<Language>('en')
 
   useEffect(() => {
     // Sync state with whatever the inline script already set
     setDark(document.documentElement.classList.contains('dark'))
+    setInitialLanguage(getInitialLanguage())
   }, [])
 
   const toggleTheme = () => {
@@ -158,15 +190,17 @@ function RootDocument({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <html lang="en" className="dark">
+    <html lang={initialLanguage} className="dark">
       <head>
         <HeadContent />
         {/* eslint-disable-next-line react/no-danger */}
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body>
-        <NavBar dark={dark} onToggle={toggleTheme} />
-        {children}
+        <LanguageProvider initialLanguage={initialLanguage}>
+          <NavBar dark={dark} onToggle={toggleTheme} />
+          {children}
+        </LanguageProvider>
         <Scripts />
       </body>
     </html>

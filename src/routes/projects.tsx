@@ -3,18 +3,29 @@ import { allProjects } from 'content-collections'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { ExternalLink, Github } from 'lucide-react'
+import {
+  pageTranslations,
+  pickLanguage,
+  projectDescriptionTranslations,
+  useLanguage,
+} from '@/lib/i18n'
 
 export const Route = createFileRoute('/projects')({
   component: Projects,
 })
 
 function Projects() {
+  const { language } = useLanguage()
+  const copy = pageTranslations[language]
+
   return (
     <div className="min-h-screen">
       <div className="max-w-4xl mx-auto px-4 py-12">
-        <h1 className="text-4xl font-bold text-gray-900 mb-2">Projects</h1>
+        <h1 className="text-4xl font-bold text-gray-900 mb-2">
+          {copy.projectsTitle}
+        </h1>
         <p className="text-gray-600 mb-8">
-          A selection of projects I've built and contributed to.
+          {copy.projectsIntro}
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -25,7 +36,15 @@ function Projects() {
               </CardHeader>
               <CardContent className="flex-1 flex flex-col">
                 <p className="text-gray-600 mb-4 flex-1">
-                  {project.description}
+                  {pickLanguage(
+                    language,
+                    projectDescriptionTranslations[
+                      project._meta.path as keyof typeof projectDescriptionTranslations
+                    ] ?? {
+                      en: project.description,
+                      es: project.description,
+                    },
+                  )}
                 </p>
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.tags.map((tag) => (
@@ -54,7 +73,7 @@ function Projects() {
                       className="inline-flex items-center gap-2 text-sm text-blue-600 hover:text-blue-800 transition-colors"
                     >
                       <ExternalLink size={16} />
-                      Live Demo
+                      {copy.liveDemo}
                     </a>
                   )}
                 </div>

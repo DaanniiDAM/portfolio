@@ -2,6 +2,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { useState } from 'react'
 import { Mail, Send } from 'lucide-react'
 import { submitContactForm } from '@/lib/contact-form'
+import { pageTranslations, useLanguage } from '@/lib/i18n'
 
 export const Route = createFileRoute('/contact')({
   component: Contact,
@@ -11,6 +12,8 @@ function Contact() {
   const [submitted, setSubmitted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState('')
+  const { language } = useLanguage()
+  const copy = pageTranslations[language]
 
   if (submitted) {
     return (
@@ -20,10 +23,10 @@ function Contact() {
             <Mail className="w-8 h-8 text-green-600" />
           </div>
           <h2 className="text-2xl font-bold text-gray-900 mb-2">
-            Message Sent!
+            {copy.messageSent}
           </h2>
           <p className="text-gray-600 mb-6">
-            Thanks for reaching out. I'll get back to you as soon as possible.
+            {copy.messageSentText}
           </p>
           <button
             onClick={() => {
@@ -32,7 +35,7 @@ function Contact() {
             }}
             className="px-6 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors"
           >
-            Send Another Message
+            {copy.sendAnother}
           </button>
         </div>
       </div>
@@ -42,9 +45,11 @@ function Contact() {
   return (
     <div className="min-h-screen">
       <div className="max-w-2xl mx-auto px-4 py-12">
-        <h1 className="text-4xl font-bold text-gray-900 mb-2">Contact</h1>
+        <h1 className="text-4xl font-bold text-gray-900 mb-2">
+          {copy.contactTitle}
+        </h1>
         <p className="text-gray-600 mb-8">
-          Have a question or want to work together? Drop me a message.
+          {copy.contactIntro}
         </p>
 
         <form
@@ -62,7 +67,7 @@ function Contact() {
               setError(
                 err instanceof Error
                   ? err.message
-                  : 'Could not send the message.',
+                  : copy.fallbackError,
               )
             } finally {
               setIsSubmitting(false)
@@ -72,7 +77,7 @@ function Contact() {
         >
           <p hidden>
             <label>
-              Don't fill this out: <input name="bot-field" />
+              {copy.botField} <input name="bot-field" />
             </label>
           </p>
 
@@ -81,7 +86,7 @@ function Contact() {
               htmlFor="name"
               className="block text-sm font-medium text-gray-700 mb-1"
             >
-              Name
+              {copy.name}
             </label>
             <input
               type="text"
@@ -89,7 +94,7 @@ function Contact() {
               name="name"
               required
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
-              placeholder="Your name"
+              placeholder={copy.namePlaceholder}
             />
           </div>
 
@@ -98,7 +103,7 @@ function Contact() {
               htmlFor="email"
               className="block text-sm font-medium text-gray-700 mb-1"
             >
-              Email
+              {copy.email}
             </label>
             <input
               type="email"
@@ -106,7 +111,7 @@ function Contact() {
               name="email"
               required
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
-              placeholder="your@email.com"
+              placeholder={copy.emailPlaceholder}
             />
           </div>
 
@@ -115,7 +120,7 @@ function Contact() {
               htmlFor="message"
               className="block text-sm font-medium text-gray-700 mb-1"
             >
-              Message
+              {copy.message}
             </label>
             <textarea
               id="message"
@@ -123,7 +128,7 @@ function Contact() {
               required
               rows={6}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors resize-none"
-              placeholder="Your message..."
+              placeholder={copy.messagePlaceholder}
             />
           </div>
 
@@ -139,7 +144,7 @@ function Contact() {
             className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors font-medium disabled:cursor-not-allowed disabled:opacity-70"
           >
             <Send size={16} />
-            {isSubmitting ? 'Sending...' : 'Send Message'}
+            {isSubmitting ? copy.sending : copy.sendMessage}
           </button>
         </form>
       </div>
