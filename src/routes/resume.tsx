@@ -36,28 +36,28 @@ function App() {
   const educations = sortByStartDateDesc(allEducations)
 
   return (
-    <div className="min-h-screen p-8 lg:p-12">
-      <div className="max-w-4xl mx-auto space-y-12">
-        <div className="text-center space-y-4">
-          <h1 className="text-5xl font-bold">
+    <div className="min-h-screen px-4 pb-10 pt-24 sm:px-6 lg:px-12 lg:pb-12">
+      <div className="mx-auto max-w-4xl space-y-8 sm:space-y-12">
+        <div className="space-y-3 text-center sm:space-y-4">
+          <h1 className="text-4xl font-bold leading-tight sm:text-5xl">
             My Resume
           </h1>
-          <p className="text-lg">
+          <p className="text-base text-muted-foreground sm:text-lg">
             Professional Experience & Education
           </p>
-          <Separator className="mt-8" />
+          <Separator className="mt-6 sm:mt-8" />
         </div>
 
         {/* Career Summary */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-2xl">
+        <Card className="gap-4 rounded-lg py-5 sm:gap-6 sm:py-6">
+          <CardHeader className="px-4 sm:px-6">
+            <CardTitle className="text-xl leading-tight sm:text-2xl">
               Career Summary
             </CardTitle>
           </CardHeader>
-          <CardContent>
-            <div className="flex items-center gap-8">
-              <p className="flex-1 leading-relaxed">
+          <CardContent className="px-4 sm:px-6">
+            <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:gap-8">
+              <p className="min-w-0 flex-1 text-sm leading-7 text-muted-foreground sm:text-base sm:text-foreground">
                 Multiplatform Application Developer specialized in process
                 automation and API integration, currently expanding into
                 Data Science and Artificial Intelligence. Experienced in
@@ -69,44 +69,44 @@ function App() {
               <img
                 src="/daniel.jpg"
                 alt="Professional headshot"
-                className="w-44 h-52 rounded-2xl object-cover"
+                className="mx-auto h-52 w-44 rounded-lg object-cover sm:mx-0 sm:rounded-xl"
               />
             </div>
           </CardContent>
         </Card>
 
         {/* Work Experience */}
-        <section className="space-y-6">
-          <h2 className="text-3xl font-semibold">
+        <section className="space-y-4 sm:space-y-6">
+          <h2 className="text-2xl font-semibold leading-tight sm:text-3xl">
             Work Experience
           </h2>
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             {jobs.map((job) => (
-              <Card key={job.jobTitle}>
-                <CardHeader>
-                  <div className="flex justify-between items-start">
-                    <div className="space-y-2">
-                      <CardTitle className="text-xl">
+              <Card key={job.jobTitle} className="gap-4 rounded-lg py-5 sm:gap-6 sm:py-6">
+                <CardHeader className="px-4 sm:px-6">
+                  <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                    <div className="min-w-0 space-y-2">
+                      <CardTitle className="text-lg leading-snug sm:text-xl">
                         {job.jobTitle}
                       </CardTitle>
-                      <p className="font-medium">
+                      <p className="break-words text-sm font-medium text-muted-foreground sm:text-base">
                         {job.company} - {job.location}
                       </p>
                     </div>
-                    <Badge variant="secondary" className="text-sm">
+                    <Badge variant="secondary" className="self-start text-xs sm:text-sm">
                       {formatDateRange(job.startDate, job.endDate, 'Present')}
                     </Badge>
                   </div>
                 </CardHeader>
-                <CardContent>
-                  <p className="mb-6 leading-relaxed">
+                <CardContent className="px-4 sm:px-6">
+                  <p className="mb-5 text-sm leading-7 text-muted-foreground sm:mb-6 sm:text-base sm:text-foreground">
                     {job.summary}
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {job.tags.map((tag) => (
                       <HoverCard key={tag}>
                         <HoverCardTrigger>
-                          <Badge variant="outline" className="cursor-pointer">
+                          <Badge variant="outline" className="cursor-pointer whitespace-normal text-center leading-relaxed">
                             {tag}
                           </Badge>
                         </HoverCardTrigger>
@@ -120,7 +120,7 @@ function App() {
                   </div>
                   {job.content && (
                     <div
-                      className="mt-6 prose prose-sm max-w-none"
+                      className="prose prose-sm mt-5 max-w-none break-words dark:prose-invert sm:mt-6"
                       dangerouslySetInnerHTML={{
                         __html: marked(job.content),
                       }}
@@ -133,30 +133,30 @@ function App() {
         </section>
 
         {/* Education */}
-        <section className="space-y-6">
-          <h2 className="text-3xl font-semibold">
+        <section className="space-y-4 sm:space-y-6">
+          <h2 className="text-2xl font-semibold leading-tight sm:text-3xl">
             Education
           </h2>
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             {educations.map((education) => (
-              <Card key={education.school}>
-                <CardHeader>
-                  <div className="flex justify-between items-start gap-4">
-                    <CardTitle className="text-xl">
+              <Card key={education.school} className="gap-4 rounded-lg py-5 sm:gap-6 sm:py-6">
+                <CardHeader className="px-4 sm:px-6">
+                  <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                    <CardTitle className="min-w-0 break-words text-lg leading-snug sm:text-xl">
                       {education.school}
                     </CardTitle>
-                    <Badge variant="secondary" className="text-sm shrink-0">
+                    <Badge variant="secondary" className="self-start text-xs sm:shrink-0 sm:text-sm">
                       {formatDateRange(education.startDate, education.endDate)}
                     </Badge>
                   </div>
                 </CardHeader>
-                <CardContent>
-                  <p className="leading-relaxed">
+                <CardContent className="px-4 sm:px-6">
+                  <p className="text-sm leading-7 text-muted-foreground sm:text-base sm:text-foreground">
                     {education.summary}
                   </p>
                   {education.content && (
                     <div
-                      className="mt-6 prose prose-sm max-w-none"
+                      className="prose prose-sm mt-5 max-w-none break-words dark:prose-invert sm:mt-6"
                       dangerouslySetInnerHTML={{
                         __html: marked(education.content),
                       }}
