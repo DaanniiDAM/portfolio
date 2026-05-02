@@ -37,7 +37,7 @@ const EMAIL = 'daniel.sanchez.devx@gmail.com'
 const LINKEDIN_URL = 'https://www.linkedin.com/in/daniel-josé-sánchez-moares-2020733a4'
 
 /** REPLACE with your GitHub URL */
-const GITHUB_URL = 'https://github.com/DaanniiDAM'
+const GITHUB_URL = 'https://github.com/DaniSanchezDevx'
 
 /** About section extended bio — REPLACE with your story */
 const ABOUT_TEXT = `I'm a junior software developer with a focus on automation, APIs, and data
