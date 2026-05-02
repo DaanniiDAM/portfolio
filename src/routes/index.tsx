@@ -6,6 +6,7 @@ import {
   educationTranslations,
   jobTranslations,
   pickLanguage,
+  projectDescriptionTranslations,
   useLanguage,
 } from '@/lib/i18n'
 import {
@@ -181,21 +182,6 @@ const SKILL_CATEGORY_LABELS = {
     'Programming Languages': 'Lenguajes de programación',
     'Tools & Platforms': 'Herramientas y plataformas',
     'Data & AI': 'Datos e IA',
-  },
-}
-
-const PROJECT_DESCRIPTIONS = {
-  'cvpilot-ai': {
-    en: 'Full-stack SaaS application that analyzes resumes against job descriptions to improve ATS compatibility, keyword coverage, and interview readiness.',
-    es: 'Aplicación SaaS full-stack que analiza CVs frente a ofertas de empleo para mejorar la compatibilidad ATS, la cobertura de palabras clave y la preparación de entrevistas.',
-  },
-  pokemon: {
-    en: 'Python application that retrieves and processes Pokemon data from an external API',
-    es: 'Aplicación en Python que obtiene y procesa datos de Pokemon desde una API externa.',
-  },
-  portfolio: {
-    en: 'Responsive developer portfolio built with TanStack Start, typed Markdown content, dark mode, project pages, resume detail, and a working Vercel contact form.',
-    es: 'Portfolio responsive desarrollado con TanStack Start, contenido Markdown tipado, modo oscuro, páginas de proyectos, CV detallado y formulario de contacto funcional en Vercel.',
   },
 }
 
@@ -502,8 +488,8 @@ function Projects() {
                 <p className="text-muted-foreground text-sm leading-relaxed">
                   {pickLanguage(
                     language,
-                    PROJECT_DESCRIPTIONS[
-                      project._meta.path as keyof typeof PROJECT_DESCRIPTIONS
+                    projectDescriptionTranslations[
+                      project._meta.path as keyof typeof projectDescriptionTranslations
                     ] ?? {
                       en: project.description,
                       es: project.description,
