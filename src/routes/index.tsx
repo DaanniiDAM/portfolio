@@ -47,7 +47,7 @@ const LINKEDIN_URL = 'https://www.linkedin.com/in/daniel-josé-sánchez-moares-2
 const GITHUB_URL = 'https://github.com/DaniSanchezDevx'
 
 const HERO_SPLINE_SCENE_URL =
-  'https://prod.spline.design/J3O5wNBtPYAM2KpV/scene.splinecode'
+  'https://prod.spline.design/ZCX1bnCPumcrfJ0g/scene.splinecode'
 
 const HOME_COPY = {
   en: {
@@ -252,8 +252,19 @@ function Hero() {
       id="hero"
       className="relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden dot-grid"
     >
-      <div className="relative z-10 mx-auto grid w-full max-w-6xl items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(340px,520px)]">
-        <div className="mx-auto max-w-3xl space-y-6 text-center lg:mx-0 lg:text-left">
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-0 hidden w-[58vw] min-w-[560px] lg:block">
+        <spline-viewer
+          url={HERO_SPLINE_SCENE_URL}
+          className="h-full w-full opacity-85 dark:opacity-80"
+        />
+        <div className="absolute inset-y-0 left-0 w-48 bg-gradient-to-r from-background via-background/75 to-transparent" />
+        <div className="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-background/85 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-background via-background/45 to-transparent" />
+        <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-background/55 to-transparent" />
+      </div>
+
+      <div className="relative z-10 mx-auto w-full max-w-6xl">
+        <div className="max-w-3xl space-y-6 text-center lg:max-w-2xl lg:text-left">
           {/* Available badge */}
           <div className="animate-fade-in inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/40 bg-primary/10 text-primary text-sm">
             {/* REPLACE "Open to opportunities" with your current status */}
@@ -321,21 +332,6 @@ function Hero() {
               <Mail size={20} />
             </a>
           </div>
-        </div>
-
-        <div
-          className="relative hidden h-[520px] min-h-0 lg:block"
-          aria-hidden="true"
-        >
-          <div className="absolute inset-y-8 right-0 w-full rounded-2xl border border-border/40 bg-card/20 shadow-2xl shadow-primary/10 backdrop-blur-sm" />
-          <div className="absolute inset-0 overflow-hidden rounded-2xl">
-            <spline-viewer
-              url={HERO_SPLINE_SCENE_URL}
-              className="h-full w-full"
-            />
-          </div>
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 rounded-b-2xl bg-gradient-to-t from-background via-background/45 to-transparent" />
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-background to-transparent" />
         </div>
       </div>
 
