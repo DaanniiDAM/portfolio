@@ -46,6 +46,9 @@ const LINKEDIN_URL = 'https://www.linkedin.com/in/daniel-josé-sánchez-moares-2
 /** REPLACE with your GitHub URL */
 const GITHUB_URL = 'https://github.com/DaniSanchezDevx'
 
+const HERO_SPLINE_SCENE_URL =
+  'https://prod.spline.design/9eeg-Vh0vd99jgoI/scene.splinecode'
+
 const HOME_COPY = {
   en: {
     headline:
@@ -249,21 +252,15 @@ function Hero() {
       id="hero"
       className="relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden dot-grid"
     >
-      {/* Gradient blobs */}
-      <div
-        className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full opacity-20 blur-3xl pointer-events-none animate-gradient-shift"
-        style={{
-          background:
-            'radial-gradient(circle, oklch(0.55 0.22 250), oklch(0.6 0.25 290))',
-        }}
-      />
-      <div
-        className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full opacity-15 blur-3xl pointer-events-none animate-gradient-shift delay-500"
-        style={{
-          background:
-            'radial-gradient(circle, oklch(0.6 0.25 290), oklch(0.65 0.2 320))',
-        }}
-      />
+      <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
+        <spline-viewer
+          url={HERO_SPLINE_SCENE_URL}
+          className="h-full w-full opacity-40 dark:opacity-35"
+        />
+        <div className="absolute inset-0 bg-background/45 dark:bg-background/60" />
+        <div className="absolute inset-x-0 bottom-0 h-52 bg-gradient-to-t from-background to-transparent" />
+        <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-background/70 to-transparent" />
+      </div>
 
       <div className="relative z-10 text-center max-w-3xl mx-auto space-y-6">
         {/* Available badge */}

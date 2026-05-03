@@ -45,6 +45,9 @@ const themeScript = `
 })();
 `
 
+const SPLINE_VIEWER_SCRIPT =
+  'https://unpkg.com/@splinetool/viewer@1.12.90/build/spline-viewer.js'
+
 function ThemeToggle({
   dark,
   onToggle,
@@ -193,6 +196,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
     <html lang={initialLanguage} className="dark">
       <head>
         <HeadContent />
+        <script type="module" src={SPLINE_VIEWER_SCRIPT} />
         {/* eslint-disable-next-line react/no-danger */}
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
