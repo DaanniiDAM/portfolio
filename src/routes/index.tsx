@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { allJobs, allEducations, allProjects } from 'content-collections'
+import { ScrollReveal } from '@/components/scroll-reveal'
 import { Badge } from '@/components/ui/badge'
 import { submitContactForm } from '@/lib/contact-form'
 import {
@@ -361,11 +362,17 @@ function About() {
   return (
     <section id="about" className="py-24 px-4">
       <div className="max-w-5xl mx-auto">
-        <SectionHeading title={copy.aboutTitle} subtitle={copy.aboutSubtitle} />
+        <ScrollReveal>
+          <SectionHeading title={copy.aboutTitle} subtitle={copy.aboutSubtitle} />
+        </ScrollReveal>
 
         <div className="mt-12 grid md:grid-cols-2 gap-12 items-start">
           {/* Profile photo */}
-          <div className="flex flex-col items-center md:items-start gap-6">
+          <ScrollReveal
+            variant="left"
+            delay={100}
+            className="flex flex-col items-center md:items-start gap-6"
+          >
             <div className="w-48 h-48 rounded-2xl bg-secondary border border-border overflow-hidden card-glow">
               <img
                 src="/daniel.jpg"
@@ -384,10 +391,14 @@ function About() {
                 </Badge>
               ))}
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* Bio text */}
-          <div className="space-y-4 text-muted-foreground leading-relaxed">
+          <ScrollReveal
+            variant="right"
+            delay={160}
+            className="space-y-4 text-muted-foreground leading-relaxed"
+          >
             {copy.aboutText.trim()
               .split('\n\n')
               .map((para, i) => (
@@ -409,7 +420,7 @@ function About() {
                 {copy.viewResume}
               </a>
             </div>
-          </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>
@@ -424,36 +435,41 @@ function Skills() {
   return (
     <section id="skills" className="py-24 px-4 bg-secondary/20">
       <div className="max-w-5xl mx-auto">
-        <SectionHeading
-          title={copy.skillsTitle}
-          subtitle={copy.skillsSubtitle}
-        />
+        <ScrollReveal>
+          <SectionHeading
+            title={copy.skillsTitle}
+            subtitle={copy.skillsSubtitle}
+          />
+        </ScrollReveal>
 
         <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {Object.entries(SKILLS).map(([category, items]) => (
-            <div
+          {Object.entries(SKILLS).map(([category, items], index) => (
+            <ScrollReveal
               key={category}
-              className="bg-card border border-border rounded-xl p-6 card-glow"
+              delay={index * 80}
+              className="h-full"
             >
-              <h3 className="font-semibold text-foreground mb-4 text-sm uppercase tracking-wider text-primary">
-                {
-                  SKILL_CATEGORY_LABELS[language][
-                    category as keyof typeof SKILL_CATEGORY_LABELS.en
-                  ]
-                }
-              </h3>
-              <ul className="space-y-3">
-                {items.map((skill) => (
-                  <li
-                    key={skill.name}
-                    className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    <span className="text-xl leading-none">{skill.icon}</span>
-                    <span className="text-sm">{skill.name}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+              <div className="h-full bg-card border border-border rounded-xl p-6 card-glow">
+                <h3 className="font-semibold text-foreground mb-4 text-sm uppercase tracking-wider text-primary">
+                  {
+                    SKILL_CATEGORY_LABELS[language][
+                      category as keyof typeof SKILL_CATEGORY_LABELS.en
+                    ]
+                  }
+                </h3>
+                <ul className="space-y-3">
+                  {items.map((skill) => (
+                    <li
+                      key={skill.name}
+                      className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      <span className="text-xl leading-none">{skill.icon}</span>
+                      <span className="text-sm">{skill.name}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </ScrollReveal>
           ))}
         </div>
       </div>
@@ -470,71 +486,76 @@ function Projects() {
   return (
     <section id="projects" className="py-24 px-4">
       <div className="max-w-5xl mx-auto">
-        <SectionHeading
-          title={copy.projectsTitle}
-          subtitle={copy.projectsSubtitle}
-        />
+        <ScrollReveal>
+          <SectionHeading
+            title={copy.projectsTitle}
+            subtitle={copy.projectsSubtitle}
+          />
+        </ScrollReveal>
 
         <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-2 gap-6">
-          {projects.map((project) => (
-            <div
+          {projects.map((project, index) => (
+            <ScrollReveal
               key={project._meta.path}
-              className="bg-card border border-border rounded-xl p-6 flex flex-col gap-4 card-glow"
+              delay={index * 90}
+              className="h-full"
             >
-              <div className="flex-1">
-                <h3 className="font-semibold text-foreground text-lg mb-2">
-                  {project.title}
-                </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {pickLanguage(
-                    language,
-                    projectDescriptionTranslations[
-                      project._meta.path as keyof typeof projectDescriptionTranslations
-                    ] ?? {
-                      en: project.description,
-                      es: project.description,
-                    },
+              <div className="h-full bg-card border border-border rounded-xl p-6 flex flex-col gap-4 card-glow">
+                <div className="flex-1">
+                  <h3 className="font-semibold text-foreground text-lg mb-2">
+                    {project.title}
+                  </h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    {pickLanguage(
+                      language,
+                      projectDescriptionTranslations[
+                        project._meta.path as keyof typeof projectDescriptionTranslations
+                      ] ?? {
+                        en: project.description,
+                        es: project.description,
+                      },
+                    )}
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap gap-2">
+                  {project.tags.map((tag) => (
+                    <Badge
+                      key={tag}
+                      variant="secondary"
+                      className="text-xs border border-border"
+                    >
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
+
+                <div className="flex items-center gap-4 pt-2 border-t border-border">
+                  {project.github && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      <Github size={15} />
+                      GitHub
+                    </a>
                   )}
-                </p>
+                  {project.liveUrl && (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-sm text-primary hover:text-primary/80 transition-colors"
+                    >
+                      <ExternalLink size={15} />
+                      {copy.liveDemo}
+                    </a>
+                  )}
+                </div>
               </div>
-
-              <div className="flex flex-wrap gap-2">
-                {project.tags.map((tag) => (
-                  <Badge
-                    key={tag}
-                    variant="secondary"
-                    className="text-xs border border-border"
-                  >
-                    {tag}
-                  </Badge>
-                ))}
-              </div>
-
-              <div className="flex items-center gap-4 pt-2 border-t border-border">
-                {project.github && (
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    <Github size={15} />
-                    GitHub
-                  </a>
-                )}
-                {project.liveUrl && (
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-sm text-primary hover:text-primary/80 transition-colors"
-                  >
-                    <ExternalLink size={15} />
-                    {copy.liveDemo}
-                  </a>
-                )}
-              </div>
-            </div>
+            </ScrollReveal>
           ))}
         </div>
       </div>
@@ -580,60 +601,65 @@ function TimelineEntries({ entries }: { entries: TimelineEntry[] }) {
       <div className="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-primary/40 to-transparent" />
 
       <div className="space-y-8 pl-16">
-        {entries.map((entry) => (
-          <div key={`${entry.type}-${entry.title}-${entry.date}`} className="relative">
-            {/* Icon dot */}
-            <div
-              className={`absolute -left-10 top-1 w-8 h-8 rounded-full flex items-center justify-center border-2 ${
-                entry.type === 'work'
-                  ? 'bg-primary/10 border-primary text-primary'
-                  : 'bg-accent/10 border-accent text-accent'
-              }`}
-            >
-              {entry.type === 'work' ? (
-                <Briefcase size={14} />
-              ) : (
-                <GraduationCap size={14} />
-              )}
-            </div>
-
-            <div className="bg-card border border-border rounded-xl p-5 card-glow">
-              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 mb-2">
-                <div>
-                  <h3 className="font-semibold text-foreground">
-                    {entry.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground">
-                    {entry.subtitle}
-                  </p>
-                </div>
-                <Badge
-                  variant="secondary"
-                  className="text-xs shrink-0 self-start border border-border"
-                >
-                  {entry.date}
-                </Badge>
+        {entries.map((entry, index) => (
+          <ScrollReveal
+            key={`${entry.type}-${entry.title}-${entry.date}`}
+            delay={index * 90}
+          >
+            <div className="relative">
+              {/* Icon dot */}
+              <div
+                className={`absolute -left-10 top-1 w-8 h-8 rounded-full flex items-center justify-center border-2 ${
+                  entry.type === 'work'
+                    ? 'bg-primary/10 border-primary text-primary'
+                    : 'bg-accent/10 border-accent text-accent'
+                }`}
+              >
+                {entry.type === 'work' ? (
+                  <Briefcase size={14} />
+                ) : (
+                  <GraduationCap size={14} />
+                )}
               </div>
-              {entry.summary && (
-                <p className="text-sm text-muted-foreground leading-relaxed mb-3">
-                  {entry.summary}
-                </p>
-              )}
-              {entry.tags.length > 0 && (
-                <div className="flex flex-wrap gap-1.5">
-                  {entry.tags.map((tag) => (
-                    <Badge
-                      key={tag}
-                      variant="outline"
-                      className="text-xs border-primary/20 text-primary/80"
-                    >
-                      {tag}
-                    </Badge>
-                  ))}
+
+              <div className="bg-card border border-border rounded-xl p-5 card-glow">
+                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 mb-2">
+                  <div>
+                    <h3 className="font-semibold text-foreground">
+                      {entry.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground">
+                      {entry.subtitle}
+                    </p>
+                  </div>
+                  <Badge
+                    variant="secondary"
+                    className="text-xs shrink-0 self-start border border-border"
+                  >
+                    {entry.date}
+                  </Badge>
                 </div>
-              )}
+                {entry.summary && (
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-3">
+                    {entry.summary}
+                  </p>
+                )}
+                {entry.tags.length > 0 && (
+                  <div className="flex flex-wrap gap-1.5">
+                    {entry.tags.map((tag) => (
+                      <Badge
+                        key={tag}
+                        variant="outline"
+                        className="text-xs border-primary/20 text-primary/80"
+                      >
+                        {tag}
+                      </Badge>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
+          </ScrollReveal>
         ))}
       </div>
     </div>
@@ -703,10 +729,12 @@ function Timeline() {
   return (
     <section id="experience" className="py-24 px-4 bg-secondary/20">
       <div className="max-w-3xl mx-auto">
-        <SectionHeading title={copy.experienceTitle} subtitle={copy.experienceSubtitle} />
+        <ScrollReveal>
+          <SectionHeading title={copy.experienceTitle} subtitle={copy.experienceSubtitle} />
+        </ScrollReveal>
 
         <div className="mt-12 space-y-14">
-          <div>
+          <ScrollReveal>
             <div className="mb-6 flex items-center gap-3 text-xl font-semibold text-foreground">
               <span className="w-9 h-9 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
                 <Briefcase size={18} />
@@ -714,9 +742,9 @@ function Timeline() {
               {copy.workExperience}
             </div>
             <TimelineEntries entries={jobs} />
-          </div>
+          </ScrollReveal>
 
-          <div>
+          <ScrollReveal>
             <div className="mb-6 flex items-center gap-3 text-xl font-semibold text-foreground">
               <span className="w-9 h-9 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center text-accent">
                 <GraduationCap size={18} />
@@ -724,7 +752,7 @@ function Timeline() {
               {copy.education}
             </div>
             <TimelineEntries entries={education} />
-          </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>
@@ -742,11 +770,13 @@ function Contact() {
   return (
     <section id="contact" className="py-24 px-4">
       <div className="max-w-2xl mx-auto">
-        <SectionHeading title={copy.contactTitle} subtitle={copy.contactSubtitle} />
+        <ScrollReveal>
+          <SectionHeading title={copy.contactTitle} subtitle={copy.contactSubtitle} />
+        </ScrollReveal>
 
         <div className="mt-12 grid sm:grid-cols-2 gap-8">
           {/* Contact info */}
-          <div className="space-y-6">
+          <ScrollReveal variant="left" delay={100} className="space-y-6">
             <p className="text-muted-foreground leading-relaxed">
               {copy.contactText}
             </p>
@@ -786,57 +816,58 @@ function Contact() {
                 <span className="text-sm">{copy.githubProfile}</span>
               </a>
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* Contact form */}
-          {submitted ? (
-            <div className="flex flex-col items-center justify-center gap-3 p-6 bg-card border border-border rounded-xl text-center">
-              <div className="w-12 h-12 rounded-full bg-green-500/10 border border-green-500/30 flex items-center justify-center text-green-500">
-                <Mail size={20} />
+          <ScrollReveal variant="right" delay={160}>
+            {submitted ? (
+              <div className="flex flex-col items-center justify-center gap-3 p-6 bg-card border border-border rounded-xl text-center">
+                <div className="w-12 h-12 rounded-full bg-green-500/10 border border-green-500/30 flex items-center justify-center text-green-500">
+                  <Mail size={20} />
+                </div>
+                <p className="font-medium text-foreground">{copy.messageSent}</p>
+                <p className="text-sm text-muted-foreground">
+                  {copy.messageSentText}
+                </p>
+                <button
+                  onClick={() => {
+                    setError('')
+                    setSubmitted(false)
+                  }}
+                  className="mt-2 text-sm text-primary hover:underline"
+                >
+                  {copy.sendAnother}
+                </button>
               </div>
-              <p className="font-medium text-foreground">{copy.messageSent}</p>
-              <p className="text-sm text-muted-foreground">
-                {copy.messageSentText}
-              </p>
-              <button
-                onClick={() => {
+            ) : (
+              <form
+                name="contact"
+                method="POST"
+                onSubmit={async (e) => {
+                  e.preventDefault()
+                  setIsSubmitting(true)
                   setError('')
-                  setSubmitted(false)
-                }}
-                className="mt-2 text-sm text-primary hover:underline"
-              >
-                {copy.sendAnother}
-              </button>
-            </div>
-          ) : (
-            <form
-              name="contact"
-              method="POST"
-              onSubmit={async (e) => {
-                e.preventDefault()
-                setIsSubmitting(true)
-                setError('')
 
-                try {
-                  await submitContactForm(e.currentTarget)
-                  setSubmitted(true)
-                } catch (err) {
-                  setError(
-                    err instanceof Error
-                      ? err.message
-                      : copy.fallbackError,
-                  )
-                } finally {
-                  setIsSubmitting(false)
-                }
-              }}
-              className="space-y-4"
-            >
-              <p hidden>
-                <label>
-                  {copy.botField} <input name="bot-field" />
-                </label>
-              </p>
+                  try {
+                    await submitContactForm(e.currentTarget)
+                    setSubmitted(true)
+                  } catch (err) {
+                    setError(
+                      err instanceof Error
+                        ? err.message
+                        : copy.fallbackError,
+                    )
+                  } finally {
+                    setIsSubmitting(false)
+                  }
+                }}
+                className="space-y-4"
+              >
+                <p hidden>
+                  <label>
+                    {copy.botField} <input name="bot-field" />
+                  </label>
+                </p>
 
               <div>
                 <label htmlFor="name" className="block text-sm font-medium mb-1">
@@ -894,8 +925,9 @@ function Contact() {
                 <Send size={15} />
                 {isSubmitting ? copy.sending : copy.sendMessage}
               </button>
-            </form>
-          )}
+              </form>
+            )}
+          </ScrollReveal>
         </div>
       </div>
     </section>
