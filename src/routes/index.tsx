@@ -50,6 +50,9 @@ const GITHUB_URL = 'https://github.com/DaniSanchezDevx'
 const HERO_SPLINE_SCENE_URL =
   'https://prod.spline.design/ZCX1bnCPumcrfJ0g/scene.splinecode'
 
+const PROJECTS_SPLINE_SCENE_URL =
+  'https://prod.spline.design/2KfZbDRazFbmijpG/scene.splinecode'
+
 const HOME_COPY = {
   en: {
     headline:
@@ -484,8 +487,24 @@ function Projects() {
   const { language, copy } = useHomeCopy()
 
   return (
-    <section id="projects" className="py-24 px-4">
-      <div className="max-w-5xl mx-auto">
+    <section id="projects" className="relative overflow-hidden py-24 px-4">
+      <div
+        className="pointer-events-none absolute inset-0 z-0 opacity-45 dark:opacity-35"
+        aria-hidden="true"
+      >
+        <spline-viewer
+          url={PROJECTS_SPLINE_SCENE_URL}
+          className="absolute left-1/2 top-1/2 h-[118%] w-[118%] -translate-x-1/2 -translate-y-1/2"
+          aria-hidden="true"
+        />
+      </div>
+      <div className="pointer-events-none absolute inset-0 z-0 bg-background/70 dark:bg-background/78" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-0 h-24 bg-gradient-to-b from-background to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-24 bg-gradient-to-t from-background to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-0 w-1/3 bg-gradient-to-r from-background to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-0 w-1/3 bg-gradient-to-l from-background to-transparent" />
+
+      <div className="relative z-10 max-w-5xl mx-auto">
         <ScrollReveal>
           <SectionHeading
             title={copy.projectsTitle}
@@ -500,7 +519,7 @@ function Projects() {
               delay={index * 90}
               className="h-full"
             >
-              <div className="h-full bg-card border border-border rounded-xl p-6 flex flex-col gap-4 card-glow">
+              <div className="h-full bg-card/92 border border-border/80 rounded-xl p-6 flex flex-col gap-4 shadow-sm backdrop-blur-md card-glow">
                 <div className="flex-1">
                   <h3 className="font-semibold text-foreground text-lg mb-2">
                     {project.title}
