@@ -499,6 +499,7 @@ function Projects() {
         />
       </div>
       <div className="pointer-events-none absolute inset-0 z-0 bg-background/42 dark:bg-background/55" />
+      <div className="pointer-events-none absolute inset-x-0 top-1/2 z-0 h-32 -translate-y-1/2 bg-gradient-to-b from-transparent via-background/82 to-transparent dark:via-background/76" />
       <div className="pointer-events-none absolute inset-x-0 top-0 z-0 h-24 bg-gradient-to-b from-background to-transparent" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-24 bg-gradient-to-t from-background to-transparent" />
       <div className="pointer-events-none absolute inset-y-0 left-0 z-0 w-1/5 bg-gradient-to-r from-background to-transparent" />
