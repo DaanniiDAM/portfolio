@@ -15,7 +15,7 @@ export function ScrollReveal({
   children,
   className,
   delay = 0,
-  once = true,
+  once = false,
   variant = 'up',
 }: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement>(null)
