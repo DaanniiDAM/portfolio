@@ -258,7 +258,7 @@ function Hero() {
       <div className="pointer-events-none absolute right-0 top-0 z-0 hidden h-[78vh] w-[60vw] min-w-[620px] overflow-hidden lg:block [mask-image:radial-gradient(circle_at_58%_30%,black_0%,black_34%,black_48%,transparent_74%),linear-gradient(to_bottom,black_0%,black_58%,transparent_88%)]">
         <spline-viewer
           url={HERO_SPLINE_SCENE_URL}
-          className="absolute right-[-3%] top-[44%] h-[118%] w-[118%] -translate-y-1/2 opacity-84 dark:opacity-78"
+          className="absolute right-[-4%] top-[40%] h-[112%] w-[112%] -translate-y-1/2 opacity-84 dark:opacity-78"
         />
         <div className="absolute inset-y-0 left-0 w-56 bg-gradient-to-r from-background via-background/82 to-transparent" />
         <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-background/90 via-background/48 to-transparent" />
