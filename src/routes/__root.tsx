@@ -183,6 +183,46 @@ function RootDocument({ children }: { children: React.ReactNode }) {
     setInitialLanguage(getInitialLanguage())
   }, [])
 
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(min-width: 1024px)')
+
+    const updatePointer = (event: MouseEvent) => {
+      if (!mediaQuery.matches) {
+        return
+      }
+
+      document.documentElement.style.setProperty(
+        '--cursor-x',
+        `${event.clientX}px`,
+      )
+      document.documentElement.style.setProperty(
+        '--cursor-y',
+        `${event.clientY}px`,
+      )
+      document.documentElement.style.setProperty('--cursor-active', '1')
+    }
+
+    const handleLeave = () => {
+      document.documentElement.style.setProperty('--cursor-active', '0')
+    }
+
+    const handleMediaChange = (event: MediaQueryListEvent) => {
+      if (!event.matches) {
+        document.documentElement.style.setProperty('--cursor-active', '0')
+      }
+    }
+
+    window.addEventListener('mousemove', updatePointer, { passive: true })
+    window.addEventListener('mouseleave', handleLeave)
+    mediaQuery.addEventListener('change', handleMediaChange)
+
+    return () => {
+      window.removeEventListener('mousemove', updatePointer)
+      window.removeEventListener('mouseleave', handleLeave)
+      mediaQuery.removeEventListener('change', handleMediaChange)
+    }
+  }, [])
+
   const toggleTheme = () => {
     const next = !dark
     setDark(next)
@@ -216,6 +256,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
               />
             </div>
             <div className="pointer-events-none absolute inset-0 bg-background/16 dark:bg-background/26" />
+            <div className="cursor-spline-glow pointer-events-none absolute inset-0" />
             <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-background/78 via-background/38 to-transparent" />
             <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-background/78 via-background/38 to-transparent" />
             <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-background/60 to-transparent" />

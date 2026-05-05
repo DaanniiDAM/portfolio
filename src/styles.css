@@ -63,6 +63,9 @@ code {
   --gradient-end: oklch(0.6 0.25 310);
   --glow-color: oklch(0.6 0.2 250 / 0.4);
   --grid-color: oklch(0.5 0.05 250 / 0.08);
+  --cursor-x: 50vw;
+  --cursor-y: 50vh;
+  --cursor-active: 0;
 }
 
 .dark {
@@ -281,6 +284,24 @@ code {
 .card-glow:hover {
   box-shadow: 0 0 0 1px var(--primary), 0 8px 32px var(--glow-color);
   transform: translateY(-2px);
+}
+
+.cursor-spline-glow {
+  opacity: calc(0.55 * var(--cursor-active));
+  background:
+    radial-gradient(
+      280px circle at var(--cursor-x) var(--cursor-y),
+      oklch(0.68 0.24 22 / 0.4),
+      oklch(0.64 0.24 18 / 0.22) 28%,
+      transparent 68%
+    ),
+    radial-gradient(
+      520px circle at var(--cursor-x) var(--cursor-y),
+      oklch(0.7 0.24 18 / 0.14),
+      transparent 70%
+    );
+  transition: opacity 220ms ease;
+  mix-blend-mode: screen;
 }
 
 /* Timeline vertical line */
