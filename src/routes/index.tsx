@@ -50,9 +50,6 @@ const GITHUB_URL = 'https://github.com/DaniSanchezDevx'
 const HERO_SPLINE_SCENE_URL =
   'https://prod.spline.design/ZCX1bnCPumcrfJ0g/scene.splinecode'
 
-const PROJECTS_SPLINE_SCENE_URL =
-  'https://prod.spline.design/2KfZbDRazFbmijpG/scene.splinecode'
-
 type PortfolioProject = (typeof allProjects)[number]
 
 const HOME_COPY = {
@@ -256,7 +253,7 @@ function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden dot-grid"
+      className="relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden"
     >
       <div className="pointer-events-none absolute inset-y-0 right-0 z-0 hidden w-[58vw] min-w-[560px] lg:block">
         <spline-viewer
@@ -438,7 +435,7 @@ function Skills() {
   const { language, copy } = useHomeCopy()
 
   return (
-    <section id="skills" className="py-24 px-4 bg-secondary/20">
+    <section id="skills" className="py-24 px-4">
       <div className="max-w-5xl mx-auto">
         <ScrollReveal>
           <SectionHeading
@@ -589,22 +586,6 @@ function Projects() {
 
   return (
     <section id="projects" className="relative overflow-hidden py-24 px-4">
-      <div
-        className="pointer-events-none absolute -inset-x-20 inset-y-[-18%] z-0 opacity-80 dark:opacity-65 lg:hidden"
-        aria-hidden="true"
-      >
-        <spline-viewer
-          url={PROJECTS_SPLINE_SCENE_URL}
-          className="absolute left-1/2 top-1/2 h-[138%] w-[138%] -translate-x-1/2 -translate-y-1/2"
-          aria-hidden="true"
-        />
-      </div>
-      <div className="pointer-events-none absolute inset-0 z-0 bg-background/42 dark:bg-background/55" />
-      <div className="pointer-events-none absolute inset-x-0 top-0 z-0 h-24 bg-gradient-to-b from-background to-transparent" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-24 bg-gradient-to-t from-background to-transparent" />
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-0 w-1/5 bg-gradient-to-r from-background to-transparent" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-0 w-1/5 bg-gradient-to-l from-background to-transparent" />
-
       <div className="relative z-10 max-w-5xl mx-auto">
         <ScrollReveal>
           <SectionHeading
@@ -872,7 +853,7 @@ function Timeline() {
   })))
 
   return (
-    <section id="experience" className="py-24 px-4 bg-secondary/20">
+    <section id="experience" className="py-24 px-4">
       <div className="max-w-3xl mx-auto">
         <ScrollReveal>
           <SectionHeading title={copy.experienceTitle} subtitle={copy.experienceSubtitle} />
@@ -1149,7 +1130,7 @@ function SectionHeading({
 
 function Portfolio() {
   return (
-    <main className="pt-16">
+    <main className="dot-grid pt-16">
       <Hero />
       <About />
       <Skills />
