@@ -264,8 +264,6 @@ function Hero() {
         <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-background/90 via-background/48 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-background via-background/52 to-transparent" />
         <div className="absolute inset-y-0 right-0 w-28 bg-gradient-to-l from-background/72 to-transparent" />
-        <div className="absolute inset-x-0 bottom-[-1px] h-80 bg-gradient-to-t from-background via-background/96 via-background/82 to-transparent" />
-        <div className="absolute -bottom-24 right-[-6%] h-96 w-[58%] rounded-full bg-background/92 blur-3xl" />
       </div>
 
       <div className="relative z-10 mx-auto w-full max-w-6xl">
