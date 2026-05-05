@@ -1,4 +1,4 @@
-# Proyecto-Master-DataScience-Evolve-DanielSanchez
+# Proyecto-Master-DataScience-Evolve-DanielJoseSanchezMoares
 
 Portfolio profesional desarrollado como proyecto academico del Master en Data Science de Evolve.
 
@@ -7,7 +7,7 @@ Este proyecto centraliza mi perfil como desarrollador, mi experiencia, mi formac
 ## Demo
 
 - Web en produccion: [danisanchezdev.vercel.app](https://danisanchezdev.vercel.app)
-- Repositorio: [GitHub](https://github.com/DaniSanchezDevx)
+- Repositorio: [Proyecto-Master-DataScience-Evolve-DanielJoseSanchezMoares](https://github.com/DaniSanchezDevx/Proyecto-Master-DataScience-Evolve-DanielJoseSanchezMoares)
 
 ## Objetivo del proyecto
 
@@ -104,8 +104,8 @@ package.json           Dependencias y scripts
 ### 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/TU_USUARIO/Proyecto-Master-DataScience-Evolve-DanielSanchez.git
-cd Proyecto-Master-DataScience-Evolve-DanielSanchez
+git clone https://github.com/DaniSanchezDevx/Proyecto-Master-DataScience-Evolve-DanielJoseSanchezMoares.git
+cd Proyecto-Master-DataScience-Evolve-DanielJoseSanchezMoares
 ```
 
 ### 2. Instalar dependencias
