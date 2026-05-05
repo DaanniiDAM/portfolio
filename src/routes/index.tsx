@@ -258,15 +258,15 @@ function Hero() {
       id="hero"
       className="relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden dot-grid"
     >
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-0 hidden w-[58vw] min-w-[560px] lg:block">
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-0 hidden w-[60vw] min-w-[620px] overflow-hidden lg:block [mask-image:radial-gradient(circle_at_58%_46%,black_0%,black_40%,black_58%,transparent_86%)]">
         <spline-viewer
           url={HERO_SPLINE_SCENE_URL}
-          className="h-full w-full opacity-85 dark:opacity-80"
+          className="absolute right-[-4%] top-1/2 h-[112%] w-[112%] -translate-y-1/2 opacity-85 dark:opacity-80"
         />
-        <div className="absolute inset-y-0 left-0 w-48 bg-gradient-to-r from-background via-background/75 to-transparent" />
-        <div className="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-background/85 to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-background via-background/45 to-transparent" />
-        <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-background/55 to-transparent" />
+        <div className="absolute inset-y-0 left-0 w-56 bg-gradient-to-r from-background via-background/82 to-transparent" />
+        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-background/90 via-background/48 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-background via-background/52 to-transparent" />
+        <div className="absolute inset-y-0 right-0 w-28 bg-gradient-to-l from-background/72 to-transparent" />
       </div>
 
       <div className="relative z-10 mx-auto w-full max-w-6xl">
