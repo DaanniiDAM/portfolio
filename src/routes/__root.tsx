@@ -206,7 +206,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       <body className="relative overflow-x-hidden">
         <LanguageProvider initialLanguage={initialLanguage}>
           <div
-            className="pointer-events-none fixed inset-0 z-0 hidden lg:block"
+            className="fixed inset-0 z-0 hidden lg:block"
             aria-hidden="true"
           >
             <div className="absolute inset-0">
