@@ -255,17 +255,17 @@ function Hero() {
       id="hero"
       className="relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden"
     >
-      <div className="pointer-events-none absolute right-0 top-0 z-0 hidden h-[78vh] w-[60vw] min-w-[620px] overflow-hidden lg:block [mask-image:radial-gradient(circle_at_58%_30%,black_0%,black_34%,black_48%,transparent_74%),linear-gradient(to_bottom,black_0%,black_58%,transparent_88%)]">
+      <div className="pointer-events-none absolute right-0 top-0 z-0 hidden h-[66vh] w-[58vw] min-w-[620px] overflow-hidden lg:block [mask-image:radial-gradient(circle_at_58%_26%,black_0%,black_30%,black_44%,transparent_68%),linear-gradient(to_bottom,black_0%,black_50%,transparent_76%)]">
         <spline-viewer
           url={HERO_SPLINE_SCENE_URL}
-          className="absolute right-[-4%] top-[40%] h-[112%] w-[112%] -translate-y-1/2 opacity-85 dark:opacity-80"
+          className="absolute right-[-5%] top-[34%] h-[118%] w-[118%] -translate-y-1/2 opacity-84 dark:opacity-78"
         />
-        <div className="absolute inset-y-0 left-0 w-56 bg-gradient-to-r from-background via-background/82 to-transparent" />
-        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-background/90 via-background/48 to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-background via-background/96 via-background/72 to-transparent" />
-        <div className="absolute inset-y-0 right-0 w-28 bg-gradient-to-l from-background/72 to-transparent" />
-        <div className="absolute inset-x-0 bottom-[-1px] h-72 bg-gradient-to-t from-background via-background/98 via-background/84 to-transparent" />
-        <div className="absolute -bottom-18 right-[4%] h-72 w-[46%] rounded-full bg-background/96 blur-3xl" />
+        <div className="absolute inset-y-0 left-0 w-72 bg-gradient-to-r from-background via-background/92 via-background/70 to-transparent" />
+        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-background/94 via-background/52 to-transparent" />
+        <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-background/84 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-background via-background/98 via-background/84 to-transparent" />
+        <div className="absolute bottom-[-2px] right-0 h-52 w-[68%] bg-gradient-to-tl from-background via-background/96 via-background/80 to-transparent" />
+        <div className="absolute -bottom-12 right-[8%] h-64 w-[50%] rounded-full bg-background blur-3xl" />
       </div>
 
       <div className="relative z-10 mx-auto w-full max-w-6xl">
