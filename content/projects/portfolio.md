@@ -1,5 +1,5 @@
 ---
-title: "Proyecto-Master-DataScience-Evolve-DanielJoseSanchezMoares"
+title: "Como construi mi Portfolio"
 description: "Portfolio profesional responsive desarrollado como proyecto del Master en Data Science de Evolve, con TanStack Start, contenido tipado, rutas adicionales y formulario de contacto funcional en Vercel."
 tags: ["TanStack Start", "React", "TypeScript", "Tailwind CSS", "Vercel", "Resend"]
 github: "https://github.com/DaniSanchezDevx/Proyecto-Master-DataScience-Evolve-DanielJoseSanchezMoares"
